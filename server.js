@@ -4,7 +4,7 @@ const http = require('http');
 const path = require('path');
 const socketIO = require('socket.io');
 
-const port =  3000; //process.env.PORT is for heroku
+const port = process.env.PORT || 3000; //process.env.PORT is for heroku
 
 const app = express();
 const server = http.Server(app);
