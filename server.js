@@ -1,14 +1,16 @@
 // Dependencies.
-var express = require('express');
-var http = require('http');
-var path = require('path');
-var socketIO = require('socket.io');
+const express = require('express');
+const http = require('http');
+const path = require('path');
+const socketIO = require('socket.io');
 
-var app = express();
-var server = http.Server(app);
-var io = socketIO(server);
+const port =  3000; //process.env.PORT is for heroku
 
-app.set('port', 5000);
+const app = express();
+const server = http.Server(app);
+const io = socketIO(server);
+
+app.set('port', port);
 app.use('/static', express.static(__dirname + '/static'));
 
 // Routing
@@ -16,8 +18,8 @@ app.get('/', function(request, response) {
   response.sendFile(path.join(__dirname, 'index.html'));
 });
 
-server.listen(5000, function() {
-  console.log('Starting server on port 5000');
+server.listen(port, function() {
+  console.log(`Starting server on port ${port}`);
 });
 
 var players = {};

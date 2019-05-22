@@ -22,6 +22,7 @@ document.addEventListener('keydown', function(event) {
       break;
   }
 });
+
 document.addEventListener('keyup', function(event) {
   switch (event.keyCode) {
     case 65: // A
