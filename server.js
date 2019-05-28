@@ -10,26 +10,13 @@ const app = express();
 const server = http.Server(app);
 const io = socketIO(server);
 
-var routing = require('./menu/routing')
-
 app.set('port', port);
 app.use('/static', express.static(__dirname + '/static'));
 
-// Routing main page (the green dots test)
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+// Routing
+app.get('/', function(request, response) {
+  response.sendFile(path.join(__dirname, 'index.html'));
 });
-
-//Routing menu page
-// app.get('/menu', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'menu/menu.html'));
-// })
-app.use('/menu', routing)
-
-//Routing game page 
-app.get('/game', (req, res) => {
-
-})
 
 server.listen(port, function() {
   console.log(`Starting server on port ${port}`);
@@ -43,7 +30,6 @@ io.on('connection', function(socket) {
       y: 300
     };
   });
-
   socket.on('movement', function(data) {
     var player = players[socket.id] || {};
     if (data.left) {
