@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "next start",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "next",
+    "build": "next build"
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,7 @@
   "homepage": "https://github.com/warrenalphonso/calpocalypse#readme",
   "dependencies": {
     "express": "^4.16.4",
+    "next": "^8.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "socket.io": "^2.2.0"
