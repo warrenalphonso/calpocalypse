@@ -1,3 +1,8 @@
 module.exports = {
-    useFileSystemPublicRoutes: true
+    useFileSystemPublicRoutes: true, 
+    // exportPathMap: function() {
+    //     return {
+    //         '/': { page: '/'}
+    //     }
+    // }
 }

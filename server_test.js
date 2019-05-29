@@ -30,7 +30,7 @@ io.on('connection', function(socket) {
       x: 300,
       y: 300
     };
-  });
+  }); 
   socket.on('movement', function(data) {
     var player = players[socket.id] || {};
     if (data.left) {

@@ -7,7 +7,8 @@
     "start": "cross-env NODE_ENV=production node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node server.js",
-    "build": "next build"
+    "build": "next build",
+    "export": "next export"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,8 @@
     "next": "^8.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "socket.io": "^2.2.0"
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0",
+    "styled-jsx": "^3.2.1"
   }
 }
