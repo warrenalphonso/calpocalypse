@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "next start",
+    "start": "cross-env NODE_ENV=production node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "next",
+    "dev": "node server.js",
     "build": "next build"
   },
   "repository": {
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/warrenalphonso/calpocalypse#readme",
   "dependencies": {
+    "cross-env": "^5.2.0",
     "express": "^4.16.4",
     "next": "^8.1.0",
     "react": "^16.8.6",

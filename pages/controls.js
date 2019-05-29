@@ -1,11 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
 
-const Game = () => (
+const Controls = () => (
     <div>
-        <h1>Game</h1>
+        <h1>Controls</h1>
         <Link href='/'><h4>Menu</h4></Link>
     </div>
- )
+)
 
-export default Game
+export default Controls
