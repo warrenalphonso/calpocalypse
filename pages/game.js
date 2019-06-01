@@ -3,6 +3,8 @@ import io from 'socket.io-client'
 import Head from 'next/head'
 import Link from 'next/link'
 
+//todo: convert class to functions, choose a character then screen changes to the game. 
+
  class Game extends Component {
     constructor(props) {
       super(props)
@@ -92,7 +94,7 @@ import Link from 'next/link'
       return (
         <div>      
           <Head>
-            <title>TEST</title>
+            <title>Game</title>
           </Head>
           <h1>Game</h1>
           <Link href='/'><h4>Menu</h4></Link>
