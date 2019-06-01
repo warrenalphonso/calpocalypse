@@ -34,9 +34,9 @@ io.on('connection', function(socket) {
   });
 });
 
-setInterval(function() {
-  io.sockets.emit('state', players);
-}, 1000 / 60); //60 updates per second
+setInterval(() => {
+  io.sockets.emit('state', players), 1000 / 60
+})
 
 nextApp.prepare().then(() => {
     app.get('*', (req, res) => {
