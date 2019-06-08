@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 
 
-class Game extends Component {
+class GreenDot extends Component {
     constructor(props) {
       super(props)
       this.state = {
@@ -113,4 +113,4 @@ class Game extends Component {
     }
   }
 
-export default Game
+export default GreenDot

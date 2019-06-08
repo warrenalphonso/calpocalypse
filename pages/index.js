@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
+import {Component} from 'react'
 import io from 'socket.io-client'
 import Head from 'next/head'
 import Link from 'next/link'
 
-const Index = () => (
+const Index = (props) => (
     <div>
       <Head>
         <title>Menu</title>

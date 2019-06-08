@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
+import GreenDot from '../green_dot_test'
 
 const Testgame = () => {
-    
+    return <GreenDot />
 }
 
 export default Testgame
