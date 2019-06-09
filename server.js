@@ -9,47 +9,60 @@ const nextHandler = nextApp.getRequestHandler();
 
 const port = process.env.PORT || 3000;
 
+// each player is id: character, x coordinate, y coordinate attributes
 var players = {};
-io.on('connection', function(socket) {
-  socket.on('new player', function() {
-    players[socket.id] = {
-      x: 300,
-      y: 300
-    };
-  }); 
 
-  socket.on('movement', function(data) {
-    var player = players[socket.id] || {};
-    if (data.left) {
-      player.x -= 5;
-    }
-    if (data.up) {
-      player.y -= 5;
-    }
-    if (data.right) {
-      player.x += 5;
-    }
-    if (data.down) {
-      player.y += 5;
-    }
+var seed = null;
+var blocks = [
+  [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+  [1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1],
+  [1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,1],
+  [1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1],
+  [1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1],
+  [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1],
+  [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+];
+var mobs ={};
+
+// this executes right when someone connects to any page
+io.on('connection', (socket) => {
+  // set up player when they join game
+  socket.on('newPlayer', (character) => {
+    players[socket.id] = {
+      character: character, 
+      x: 1, 
+      y: 1 
+    };
+
+    console.log(`Players online: ${Object.keys(players).length}`)
   });
 
+  // remove player when they leave 
   socket.on('disconnect', () => {
     delete players[socket.id];
   });
 });
 
+// update players 
+//TODO: -- how/when to update players, blocks, mobs 
 setInterval(() => {
-  io.sockets.emit('state', players), 1000 / 60;
-});
+  io.sockets.emit('playerState', players);
+}, 1000 / 60);
+
+
+
 
 nextApp.prepare().then(() => {
-    app.get('*', (req, res) => {
-        return nextHandler(req, res);
-    });
+  app.get('*', (req, res) => {
+      return nextHandler(req, res);
+  });
 
-    server.listen(port, (err) => {
-        if (err) throw err;
-        console.log(`Ready on port: ${port}`);
-    });
+  server.listen(port, (err) => {
+      if (err) throw err;
+      console.log(`Ready on port: ${port}`);
+  });
 });

@@ -1,23 +1,27 @@
-import {useState} from 'react'
-import io from 'socket.io-client'
-import Head from 'next/head'
-import Link from 'next/link'
+import { useState, useEffect} from 'react';
+import io from 'socket.io-client';
+import Head from 'next/head';
+import Link from 'next/link';
 
-import GreenDot from '../green_dot_test'
-import ChooseCharacter from '../choose_character'
+import ChooseCharacter from '../choose_character';
+import Calpocalypse from '../calpocalypse';
 
 const Game = (props) => {
-    const [character, setCharacter] = useState(null)
+    const [socket, setSocket] = useState(io());
+    const [character, setCharacter] = useState(null);
 
-    const onChooseCharacter = (char) => {
-        setCharacter(char)
-    }
-
+    useEffect(() => {
+        socket.connect();
+        return () => {socket.disconnect()};
+    });
+    
     if (character == null) {
-        return <ChooseCharacter onChooseCharacter = {onChooseCharacter} />
-    } else {
-        return <GreenDot />
-    }
-}
+        return <ChooseCharacter onChooseCharacter={(char) => {setCharacter(char)}} />;
+    };
 
-export default Game
+    socket.emit('newPlayer', character);
+
+    return <Calpocalypse socket={socket} />;
+};
+
+export default Game;

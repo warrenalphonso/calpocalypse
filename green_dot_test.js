@@ -104,7 +104,7 @@ class GreenDot extends Component {
             canvas {
               width: 800px;
               height: 600px; 
-              border: 5px solid black;
+              border: 10px solid black;
             }
           `}
           </style>

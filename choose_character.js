@@ -2,12 +2,11 @@ import React, { useState } from 'react'
 import Head from 'next/head'
 
 const ChooseCharacter = (props) => {
-    const [characterChosen, setCharacterChosen] = useState(null)
-
     const handleChange = (e) => {
-        setCharacterChosen(e.target.value)
         props.onChooseCharacter(e.target.value)
         console.log(`Clicked: state is ${e.target.value}`)
+
+        //activate socket here?
     }
 
     return (
