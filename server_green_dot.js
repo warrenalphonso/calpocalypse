@@ -50,6 +50,6 @@ nextApp.prepare().then(() => {
 
     server.listen(port, (err) => {
         if (err) throw err;
-        console.log(`Ready on port: ${port}`);
+        console.log(`gdot Ready on port: ${port}`);
     });
 });

@@ -100,14 +100,17 @@ class GreenDot extends Component {
           <Link href='/'><h4>Menu</h4></Link>
   
           <canvas ref="canvas"></canvas>
-          <style jsx> {`
-            canvas {
-              width: 800px;
-              height: 600px; 
-              border: 10px solid black;
-            }
-          `}
-          </style>
+          <style global jsx>{`
+                html, 
+                body {
+                    height: 100%;
+                } 
+
+                canvas[resize] {
+                    width: 100%;
+                    height: 100%;
+                }
+            `}</style>
         </div>
       )
     }

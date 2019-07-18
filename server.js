@@ -38,7 +38,16 @@ io.on('connection', (socket) => {
       y: 1 
     };
 
-    console.log(`Players online: ${Object.keys(players).length}`)
+    var numPlayersOnline = Object.keys(players).length;
+
+    if (numPlayersOnline == 1) {
+      // Choose a random seed - maybe let player type in a seed later 
+      seed = Math.floor(Math.random() * 1000);
+
+      // TODO: Build world now by randomly creating an array of blocks, then emit that array?
+    };
+
+    console.log(`Players online: ${numPlayersOnline}`)
   });
 
   // remove player when they leave 
@@ -50,7 +59,7 @@ io.on('connection', (socket) => {
 // update players 
 //TODO: -- how/when to update players, blocks, mobs 
 setInterval(() => {
-  io.sockets.emit('playerState', players);
+  io.sockets.emit('state', blocks);
 }, 1000 / 60);
 
 
