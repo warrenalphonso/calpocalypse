@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 
 /** Master component for Rendering everything */
 const Calpocalypse = (props) => {
-    //props has socket 
+    /**
+     * Props has 
+     *  - socket: io() instance 
+     *  - start: boolean, whether or not player has chosen character
+     */
     const socket = props.socket;
    
     const canvasRef = React.createRef();
@@ -14,18 +18,37 @@ const Calpocalypse = (props) => {
 
         var actions = {
             movement: {
-                up: false, 
-                down: false, 
-                left: false, 
-                right: false
+                x: null, 
+                y: null
             }, 
             //other stuff... 
         }
 
-        socket.on('state', (blocks) => {
+        document.addEventListener('keydown', function(event) {
+            if (actions.movement.x == null && actions.movement.y == null) {
+                return;
+            }
+            switch (event.keyCode) {
+              case 65: // A
+                actions.movement.x -= 1;
+                break;
+              case 87: // W
+                actions.movement.y += 1;
+                break;
+              case 68: // D
+                actions.movement.x += 1;
+                break;
+              case 83: // S
+                actions.movement.y -= 1;
+                break;
+            }
+          });           
+
+        socket.on('state', (data) => {
             //const myPlayer = players[socket.id];
 
             // Draw tiles - make this into a function 
+            var blocks = data.blocks;
             const tileSize = 8;
             context.clearRect(0, 0, canvas.width, canvas.length);
             context.fillStyle = "rgba(255, 0, 0, 0.6)";
@@ -37,6 +60,20 @@ const Calpocalypse = (props) => {
                         );
                     }
                 }
+            }
+
+            // Draw players on top of blocks 
+            var players = data.players;
+            //actions.movement.x = players[socket.id].x;
+            //actions.movement.y = players[socket.id].y;
+            var parray = Object.values(players);
+            // parray is an array of objects so for ... in gives index of each object not the object itself 
+            for (var pindex in parray) {
+                var player = parray[pindex];
+                context.fillStyle = "rgba(0, 255, 0, 0.6)"; 
+                context.fillRect(
+                    player.y * tileSize, player.x * tileSize, tileSize, tileSize
+                );
             }
 
             // render only around a certain player 

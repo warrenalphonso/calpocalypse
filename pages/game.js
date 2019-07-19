@@ -23,7 +23,7 @@ const Game = (props) => {
     if (character == null) {
         return (
             <div>
-                <Calpocalypse socket={socket} />
+                <Calpocalypse socket={socket} start={false}/>
                 <ChooseCharacter onChooseCharacter={(char) => {setCharacter(char)}} />
             </div>
         );

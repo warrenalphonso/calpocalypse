@@ -34,8 +34,8 @@ io.on('connection', (socket) => {
   socket.on('newPlayer', (character) => {
     players[socket.id] = {
       character: character, 
-      x: 1, 
-      y: 1 
+      x: 10, 
+      y: 10 
     };
 
     var numPlayersOnline = Object.keys(players).length;
@@ -50,16 +50,19 @@ io.on('connection', (socket) => {
     console.log(`Players online: ${numPlayersOnline}`)
   });
 
-  // remove player when they leave 
+  // remove player when they leave, wait this gets called too early fix it
   socket.on('disconnect', () => {
-    delete players[socket.id];
+    //delete players[socket.id];
   });
 });
 
 // update players 
 //TODO: -- how/when to update players, blocks, mobs 
 setInterval(() => {
-  io.sockets.emit('state', blocks);
+  io.sockets.emit('state', {
+    blocks: blocks, 
+    players: players
+  });
 }, 1000 / 60);
 
 
