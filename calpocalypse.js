@@ -11,6 +11,7 @@ const Calpocalypse = (props) => {
    
     const canvasRef = React.createRef();
     /** PROBLEM: CANVAS IS UNDEFINED ON SERVER-SIDE RENDERING. The following is low-quality; use Paper.js */
+
     /** This draws everything for the client */
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -85,6 +86,8 @@ const Calpocalypse = (props) => {
         }, 1000 / 60);
     });
 
+
+    
     //Replace script tag below: 
     // <script type="text/paperscript" canvas="canvas"> 
     //     {console.log("hello?")};
