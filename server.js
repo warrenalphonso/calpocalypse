@@ -2,9 +2,7 @@ var express = require('express');
 var app = express();
 
 var http = require('http');
-var socketIO = require('socket.io');
 var server = http.Server(app);
-var io = socketIO(server);
 
 const port = process.env.PORT || 3000; 
 app.listen(port, () => console.log(`Server started on port ${port}.`));
@@ -14,7 +12,7 @@ app.get('/api', (req, res) => {
 });
 
 app.get('/movement', (req, res) => {
-  res.statusu(200).json({
+  res.status(200).json({
     movedLeft: 'yes'
   })
 })

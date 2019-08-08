@@ -1,8 +1,13 @@
+// Change to 'localhost:3000' when testing and 'https://cors-anywhere.herokuapp.com/https://calpocalypse-backend.herokuapp.com' when not 
+const port = 'https://cors-anywhere.herokuapp.com/https://calpocalypse-backend.herokuapp.com'
+
+
+
 // Create a request variable and assign a new   XMLHttpRequest object 
 var request = new XMLHttpRequest() 
 
 // Open a new connection, using GET; Using 'https://cors-anywhere.herokuapp.com/' is necessary to call a URL that isn't the one you're currently on
-request.open('GET', 'https://cors-anywhere.herokuapp.com/https://calpocalypse-backend.herokuapp.com/api', true)
+request.open('GET', port + '/api', true)
 
 request.onload = function() {
     // Begin accessing JSON here. Use JSON.parse() to convert to JS object. 
@@ -25,7 +30,7 @@ request.send()
 
 var movementRequest = new XMLHttpRequest() 
 
-movementRequest.open('GET', 'https://cors-anywhere.herokuapp.com/https://calpocalypse-backend.herokuapp.com/movement', true) 
+movementRequest.open('GET', port + '/movement', true) 
 
 movementRequest.onload = function() {
     var data = JSON.parse(this.response) 
