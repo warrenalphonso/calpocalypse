@@ -23,5 +23,8 @@
     "lodash": "^4.17.14",
     "paper": "^0.12.3",
     "uniqid": "^5.0.3"
+  },
+  "devDependencies": {
+    "eslint": "^6.1.0"
   }
 }

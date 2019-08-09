@@ -2,62 +2,86 @@
 const port = 'https://cors-anywhere.herokuapp.com/https://calpocalypse-backend.herokuapp.com'
 
 var id;
-var name = 'skeleton man'
+var name = 'Warren'
 var char = 'EECS'
 
 // Apparently XMLHttpRequests can only have .send() called once?
 // Handle if Heroku dyno is down
 
-// Get player ID 
-var createPlayer = new XMLHttpRequest() 
-createPlayer.open('POST', port + `/players/${name}/${char}`, true)
-createPlayer.onload = () => {
-    id = JSON.parse(createPlayer.response).id
-    if (createPlayer.status === 201) {
+
+/**
+ * GET PLAYER ID. Need to test error. 
+ */
+fetch(port + `/players/${name}/${char}`, {
+        method: 'POST'
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('POST failed!')
+        }
+        return response.json()
+    })
+    .then(data => {
+        id = data.id 
         console.log(id)
-    } else {
-        console.log('Error POSTing new player. ')
-    }
-}
-createPlayer.send()
+    }).catch(error => {
+        console.error(error)
+    })
+
 
 /** 
  * MOVEMENT. The following functions create XMLHttpRequests to PATCH player movement. Finally there are two listeners for wasd or arrow keys.  
  **/
 const moveLeft = () => {
-    var left = new XMLHttpRequest()
-    left.open('PATCH', port + `/players/${id}/-1/0`, true)
-    // left.onload = () => {
-    //     console.log(left.response)
-    // }
-    left.send()
+    fetch(port + `players/${id}/-1/0`, {
+            method: 'PATCH'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('PATCH for moving left failed!')
+            }
+        }).catch(error => {
+            console.log(error)
+        })
 }
 
 const moveRight = () => {
-    var right = new XMLHttpRequest()
-    right.open('PATCH', port + `/players/${id}/1/0`, true)
-    // right.onload = () => {
-    //     console.log(right.response)
-    // }
-    right.send()
+    fetch(port + `players/${id}/1/0`, {
+            method: 'PATCH'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('PATCH for moving right failed!')
+            }
+        }).catch(error => {
+            console.log(error)
+        })
 }
 
 const moveUp = () => {
-    var up = new XMLHttpRequest()
-    up.open('PATCH', port + `/players/${id}/0/1`, true)
-    // up.onload = () => {
-    //     console.log(up.response)
-    // }
-    up.send()
+    fetch(port + `players/${id}/0/1`, {
+        method: 'PATCH'
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('PATCH for moving up failed!')
+        }
+    }).catch(error => {
+        console.log(error)
+    })
 }
 
 const moveDown = () => {
-    var down = new XMLHttpRequest()
-    down.open('PATCH', port + `/players/${id}/0/-1`, true)
-    // down.onload = () => {
-    //     console.log(down.response)
-    // }
-    down.send()
+    fetch(port + `players/${id}/0/-1`, {
+        method: 'PATCH'
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('PATCH for moving down failed!')
+        }
+    }).catch(error => {
+        console.log(error)
+    })
 }
 
 // Using e.code since it's case insensitive: 'a' || 'A' = 'KeyA'
