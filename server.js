@@ -29,7 +29,7 @@ app.post('/players/:name/:char', (req, res) => {
     y: startCoords[1]
   }
   // Sends back ID 
-  res.status(404).json({
+  res.status(200).json({
     id: id
   })
 })
