@@ -2,8 +2,8 @@
 const port = 'https://cors-anywhere.herokuapp.com/https://calpocalypse-backend.herokuapp.com'
 
 
-
-// Create a request variable and assign a new   XMLHttpRequest object 
+// Apparently XMLHttpRequests can only have .send() called once?
+// Create a request variable and assign a new XMLHttpRequest object 
 var request = new XMLHttpRequest() 
 
 // Open a new connection, using GET; Using 'https://cors-anywhere.herokuapp.com/' is necessary to call a URL that isn't the one you're currently on
@@ -27,24 +27,29 @@ request.send()
 
 
 
-
 var movementRequest = new XMLHttpRequest() 
 
-movementRequest.open('GET', port + '/movement', true) 
-
-movementRequest.onload = function() {
-    var data = JSON.parse(this.response) 
-
-    if (request.status >= 200 && request.status < 400) {
-        console.log(data)
-    }
-}
 
 // Using event.code since it's case insensitive: 'a' || 'A' = 'KeyA'
 document.addEventListener('keydown', event => {
     const code = event.code 
 
-    if (code === 'keyA') {
+    if (code === 'KeyA') {
+        movementRequest.open('GET', port + '/movement', true)
+        movementRequest.onload = function() {
+            var data = JSON.parse(this.response) 
+            if (request.status >= 200 && request.status < 400) {
+                console.log(data)
+            }
+        }
         movementRequest.send()
     }
 })
+
+var testRequest = new XMLHttpRequest()
+testRequest.open('POST', port + '/user/joe', true) 
+testRequest.onload = function() {
+    var data = this.response 
+    console.log(data) 
+}
+testRequest.send()
