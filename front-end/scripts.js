@@ -21,13 +21,14 @@ const port = 'https://cors-anywhere.herokuapp.com/https://calpocalypse-backend.h
 
 
 // Get player ID 
-var createPlayerReq = new XMLHttpRequest() 
-createPlayerReq.open('POST', port + `/players/warren/eecs`, true)
-createPlayerReq.onload = function() {
-    var data = JSON.parse(this.response)
-    console.log(data)
+var id;
+
+var createPlayer = new XMLHttpRequest() 
+createPlayer.open('POST', port + `/players/warren/eecs`, true)
+createPlayer.load = () => {
+    id = JSON.parse(createPlayer.response).id
 }
-createPlayerReq.send()
+createPlayer.send()
 
 
 // Using e.code since it's case insensitive: 'a' || 'A' = 'KeyA'

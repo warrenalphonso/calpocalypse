@@ -29,8 +29,10 @@ app.post('/players/:name/:char', (req, res) => {
     x: startCoords[0], 
     y: startCoords[1]
   }
-
-  res.status(201).send(`POST request for id: ${id}, name: ${req.params.name}, and character: ${req.params.char} was successful.`)
+  // Sends back ID 
+  res.status(201).json({
+    id: id
+  })
 })
 
 // DELETE player 
