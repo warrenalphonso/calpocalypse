@@ -5,8 +5,8 @@ var id;
 var name = 'Warren'
 var char = 'EECS'
 
-// Apparently XMLHttpRequests can only have .send() called once?
 // Handle if Heroku dyno is down
+// Remember I can use the header with the Fetch API in case I need it
 
 
 /**
@@ -30,10 +30,11 @@ fetch(port + `/players/${name}/${char}`, {
 
 
 /** 
- * MOVEMENT. The following functions create XMLHttpRequests to PATCH player movement. Finally there are two listeners for wasd or arrow keys.  
+ * MOVEMENT. The following functions create Fetch API requests to PATCH player movement. 
+ * Compatible with WASD or arrow keys.  
  **/
 const moveLeft = () => {
-    fetch(port + `players/${id}/-1/0`, {
+    fetch(port + `/players/${id}/-1/0`, {
             method: 'PATCH'
         })
         .then(response => {
@@ -46,7 +47,7 @@ const moveLeft = () => {
 }
 
 const moveRight = () => {
-    fetch(port + `players/${id}/1/0`, {
+    fetch(port + `/players/${id}/1/0`, {
             method: 'PATCH'
         })
         .then(response => {
@@ -59,7 +60,7 @@ const moveRight = () => {
 }
 
 const moveUp = () => {
-    fetch(port + `players/${id}/0/1`, {
+    fetch(port + `/players/${id}/0/1`, {
         method: 'PATCH'
     })
     .then(response => {
@@ -72,7 +73,7 @@ const moveUp = () => {
 }
 
 const moveDown = () => {
-    fetch(port + `players/${id}/0/-1`, {
+    fetch(port + `/players/${id}/0/-1`, {
         method: 'PATCH'
     })
     .then(response => {
@@ -102,12 +103,19 @@ document.addEventListener('keydown', e => {
     }
 })
 
+
 /**
  * DELETES PLAYER WHEN THEY LEAVE WEBPAGE.
  */
 window.onbeforeunload = () => {
-    var deletePlayer = new XMLHttpRequest() 
-    deletePlayer.open('DELETE', port + `/players/${id}`, true)
-    deletePlayer.send()
-    return "Deleting player..."
+    fetch(port + `/players/${id}`, {
+        method: 'DELETE'
+    })
+    .then(resource => {
+        if (!resource.ok) {
+            throw new Error('DELETE player failed!')
+        }
+    }).catch(error => {
+        console.log(error)
+    })
 }
