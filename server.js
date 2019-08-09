@@ -19,7 +19,6 @@ app.get('/players', (req, res) => {
 })
 
 // POST new player 
-// !! Make sure to generate a random, unique ID or players can be overwritten !!
 app.post('/players/:name/:char', (req, res) => {
   const id = uniqid()
   const startCoords = genStartCoords()
