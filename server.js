@@ -41,7 +41,7 @@ const genStartCoords = () => {
   return [1, 1]
 }
 
-const movePlayer = (id, newX, newY) {
+const movePlayer = (id, newX, newY) => {
   blocks[players[id].y][players[id].x] = originalBlocks[players[id].y][players[id].x]
   players[id].x = newX
   players[id].y = newY
