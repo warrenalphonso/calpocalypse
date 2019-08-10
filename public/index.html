@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
   <head>
     <title>A Multiplayer Game</title>
@@ -11,4 +11,19 @@
     <script type="text/paperscript" src="js/paperjs/tiles.js" canvas="canvas"></script>
   </body>
   <script src="js/main.js" type="module"></script>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>A Multiplayer Game</title>
+    <link href="style.css" rel="stylesheet" /> 
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/paperjs/paper-full.js"></script>
+    <script src="js/socket.js"></script>
+  </head>
+  <body style="padding:0;">
+    <canvas id="myCanvas" resize="true" keepalive="true"></canvas>
+    <script type="text/paperscript" src="js/paperjs/tiles.js" canvas="myCanvas"></script>>
+  </body>
 </html>
