@@ -61,12 +61,14 @@ app.get('/players', (req, res) => {
 // POST new player 
 app.post('/players/:name/:char', (req, res) => {
   const id = uniqid()
+  const startCoords = genStartCoords()
   players[id] = {
     name: req.params.name,
     facing: 'n',
-    char: req.params.char
+    char: req.params.char, 
+    x: startCoords[0], 
+    y: startCoords[1]
   }
-  const startCoords = genStartCoords()
   movePlayer(id, startCoords[0], startCoords[1])
   // Sends back ID 
   res.status(200).json({
