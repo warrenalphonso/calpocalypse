@@ -24,6 +24,7 @@ app.post('/players/:name/:char', (req, res) => {
   const startCoords = genStartCoords()
   players[id] = {
     name: req.params.name,
+    facing: 'n',
     char: req.params.char, 
     x: startCoords[0], 
     y: startCoords[1]
