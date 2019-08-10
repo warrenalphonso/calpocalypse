@@ -30,7 +30,7 @@ const genStartCoords = () => {
 }
 
 // GET blocks 
-app.get('/block', (req, res) => {
+app.get('/blocks', (req, res) => {
   res.status(200).json(blocks)
   blocks[1][i] = 2
   i++
