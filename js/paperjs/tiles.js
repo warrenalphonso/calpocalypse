@@ -13,6 +13,6 @@ function update(){
 				}
 			}
 		}
-		setTimeout(update, 1000 / 60)
+		// setTimeout(update, 1500)
     })
 }
