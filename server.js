@@ -41,11 +41,11 @@ const genStartCoords = () => {
   return [1, 1]
 }
 
-const movePlayer = (id, newX, newY) => {
+const movePlayer = (id, dx, dy) => {
   blocks[players[id].y][players[id].x] = originalBlocks[players[id].y][players[id].x]
-  players[id].x = newX
-  players[id].y = newY
-  blocks[newY][newX] = 2
+  players[id].x += dx
+  players[id].y += dy
+  blocks[players[id].y][players[id].x] = 2
 }
 
 // GET blocks 
