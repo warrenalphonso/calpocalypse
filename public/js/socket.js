@@ -1,24 +1,6 @@
 var socket = io() 
 socket.emit('newPlayer', 'Warren', 'EECS')
 
-blocks = [
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-    [1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-    [1,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1],
-    [1,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1],
-    [1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,1],
-    [1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1],
-    [1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-    [1,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1],
-    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1],
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
-  ]
-
-
-window.globals = {
-    blocks
-}
 /** 
  * MOVEMENT. The following functions create Fetch API requests to PATCH player movement. 
  * Compatible with WASD or arrow keys.  
@@ -44,14 +26,5 @@ document.addEventListener('keydown', e => {
         console.log('T is for talk')
     } else if (code === 'Space') {
         console.log('Space is for attack')
-    }
-})
-
-// data has stateChanged, blocks, players
-socket.on('state', (stateChanged, newBlocks, players) => {
-    window.globals = {
-        stateChanged,
-        blocks, 
-        players
     }
 })

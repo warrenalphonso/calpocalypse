@@ -65,6 +65,7 @@ io.on('connection', socket => {
       x: startCoords[0], 
       y: startCoords[1]
     } 
+    io.sockets.emit('state', blocks, players)
 
     var numPlayersOnline = Object.keys(players).length 
 
@@ -81,16 +82,17 @@ io.on('connection', socket => {
   socket.on('movement', (dx, dy) => {
     players[socket.id].x += dx 
     players[socket.id].y += dy
-    console.log(players[socket.id].x, players[socket.id].y)
+    io.sockets.emit('state', blocks, players)
   })
 
   // TEST THIS
   socket.on('disconnect', () => {
     console.log('bye')
     delete players[socket.id]
+    io.sockets.emit('state', blocks, players)
   })
 })
 
-setInterval(() => {
-  io.sockets.emit('state', true, blocks, players)
-}, 1000 / 60)
+// setInterval(() => {
+//   io.sockets.emit('state', true, blocks, players)
+// }, 1000 / 60)
