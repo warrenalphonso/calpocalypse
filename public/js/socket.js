@@ -1,10 +1,24 @@
 var socket = io() 
+socket.emit('newPlayer', 'Warren', 'EECS')
 
-socket.emit('newPlayer', {
-    name: 'Warren', 
-    char: 'EECS'
-})
+blocks = [
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1],
+    [1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+  ]
 
+
+window.globals = {
+    blocks
+}
 /** 
  * MOVEMENT. The following functions create Fetch API requests to PATCH player movement. 
  * Compatible with WASD or arrow keys.  
@@ -14,12 +28,16 @@ document.addEventListener('keydown', e => {
     const code = e.code
     if (code === 'KeyA' || code === 'ArrowLeft') {
         console.log('left')
+        socket.emit('movement', -1, 0)
     } else if (code === 'KeyD' || code === 'ArrowRight') {
         console.log('right')
+        socket.emit('movement', 1, 0)
     } else if (code === 'KeyW' || code === 'ArrowUp') {
         console.log('up')
+        socket.emit('movement', 0, -1)
     } else if (code === 'KeyS' || code === 'ArrowDown') {
         console.log('down')
+        socket.emit('movement', 0, 1)
     } else if (code === 'KeyE') {
         console.log('E is for use')
     } else if (code === 'KeyT') {
@@ -30,6 +48,10 @@ document.addEventListener('keydown', e => {
 })
 
 // data has stateChanged, blocks, players
-// socket.on('state', data => {
-//     console.log(data.stateChanged)
-// })
+socket.on('state', (stateChanged, newBlocks, players) => {
+    window.globals = {
+        stateChanged,
+        blocks, 
+        players
+    }
+})

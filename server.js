@@ -35,7 +35,7 @@ var players = {}
 
 var blocks = [
   [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-  [1,2,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,0,0,0,0,0,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
   [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
   [1,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1],
   [1,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1],
@@ -55,12 +55,12 @@ const genStartCoords = () => {
 io.on('connection', socket => {
   console.log('New socket connected') 
 
-  socket.on('newPlayer', data => {
-    console.log(data.name, data.char)
+  socket.on('newPlayer', (name, char) => {
+    console.log(name, char)
     const startCoords = genStartCoords()
     players[socket.id] = {
-      name: data.name,
-      char: data.char, 
+      name: name,
+      char: char, 
       facing: 'n',
       x: startCoords[0], 
       y: startCoords[1]
@@ -78,16 +78,19 @@ io.on('connection', socket => {
     console.log(`Players online: ${numPlayersOnline}`)
   })
 
+  socket.on('movement', (dx, dy) => {
+    players[socket.id].x += dx 
+    players[socket.id].y += dy
+    console.log(players[socket.id].x, players[socket.id].y)
+  })
+
   // TEST THIS
   socket.on('disconnect', () => {
+    console.log('bye')
     delete players[socket.id]
   })
 })
 
 setInterval(() => {
-  io.sockets.emit('state', {
-    stateChanged: true, 
-    blocks, 
-    players,
-  })
+  io.sockets.emit('state', true, blocks, players)
 }, 1000 / 60)

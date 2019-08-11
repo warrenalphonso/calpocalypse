@@ -30,18 +30,9 @@
 // 	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1],
 // 	[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 //   ];
+
   
 
-for (var y = 0; y < blocks.length; y++) {
-	for (var x = 0; x < blocks[y].length; x++) {
-		var block = new Path.Rectangle(50* x, 50 * y, 50, 50)
-		if (blocks[y][x] === 1) {
-			block.fillColor = 'red'
-		} else if (blocks[y][x] === 2) {
-			block.fillColor = 'black'
-		}
-	}
-}
 
 // socket.on('state', data => {
 //     // console.log(data.stateChanged)
@@ -52,3 +43,28 @@ for (var y = 0; y < blocks.length; y++) {
 // io.on('hi', () => {
 // 	var id = 'hi'
 // })
+
+function update() {
+	var blocks = globals.blocks 
+	for (var y = 0; y < blocks.length; y++) {
+		for (var x = 0; x < blocks[y].length; x++) {
+			var block = new Path.Rectangle(50 * x, 50 * y, 50, 50)
+			if (blocks[y][x] === 1) {
+				block.fillColor = 'red'
+			} else {
+				block.fillColor = 'white'
+			}
+		}
+	}
+	var players = globals.players 
+	for (id in players) {
+		var player = players[id]
+		var block = new Path.Rectangle(50 * player.x, 50 * player.y, 50, 50)
+		block.fillColor = 'black'
+	}
+	setTimeout(update, 1000 / 60)
+}
+
+
+
+update()
