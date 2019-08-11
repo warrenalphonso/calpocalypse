@@ -65,7 +65,7 @@ io.on('connection', socket => {
       x: startCoords[0], 
       y: startCoords[1]
     } 
-    io.sockets.emit('state', blocks, players)
+    io.sockets.emit('load', blocks, players)
 
     var numPlayersOnline = Object.keys(players).length 
 
@@ -80,19 +80,24 @@ io.on('connection', socket => {
   })
 
   socket.on('movement', (dx, dy) => {
+    var replaceBlock = {
+      x: players[socket.id].x, 
+      y: players[socket.id].y,
+      block: blocks[players[socket.id].y][players[socket.id].x]
+    }
     players[socket.id].x += dx 
     players[socket.id].y += dy
-    io.sockets.emit('state', blocks, players)
+    io.sockets.emit('update', players[socket.id], replaceBlock)
   })
 
   // TEST THIS
   socket.on('disconnect', () => {
-    console.log('bye')
+    var replaceBlock = {
+      x: players[socket.id].x, 
+      y: players[socket.id].y, 
+      block: blocks[players[socket.id].y][players[socket.id].x]
+    }
+    io.sockets.emit('removePlayer', replaceBlock)
     delete players[socket.id]
-    io.sockets.emit('state', blocks, players)
   })
 })
-
-// setInterval(() => {
-//   io.sockets.emit('state', true, blocks, players)
-// }, 1000 / 60)
