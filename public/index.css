@@ -1,0 +1,19 @@
+body {
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+/* Loading page source: https://smallenvelop.com/display-loading-icon-page-loads-completely/ */
+/* Style loading screen here */
+#loading-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    display: none;
+}
+
+/* Style loading text here */
+/* #loading-text {
+
+} */

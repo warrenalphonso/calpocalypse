@@ -10,6 +10,10 @@ var io = require('socket.io')(server)
 
 app.use(express.static(path.join(__dirname, 'public')))
 
+app.get('/running', (req, res) => {
+  res.status(200)
+})
+
 app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, 'public/game.html'))
 })
