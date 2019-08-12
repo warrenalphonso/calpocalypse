@@ -11,7 +11,7 @@ var io = require('socket.io')(server)
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.get('/', (req, res) => {
-  res.status(200).sendFile('./game.html')
+  res.status(200).sendFile('./index.html')
 })
 
 server.listen(port, err => {
