@@ -7,9 +7,11 @@ const herokuPort = 'https://cors-anywhere.herokuapp.com/https://calpocalypse.her
 window.onload = () => {
     const gameLink = document.getElementById('game')
     gameLink.onclick = () => {
+        console.log('Serving up loading page')
         document.getElementById('content').style.display = 'none'
         document.getElementById('loading-screen').style.display = 'block'
 
+        console.log('Fetching /running to start dyno')
         fetch(herokuPort + '/running', {
             method: 'GET'
         })
@@ -19,6 +21,7 @@ window.onload = () => {
             } else {
                 // Go to calpocalypse.warrenalphonso.com
                 console.log('Success!!!!')
+                console.log(res.json())
                 window.location.assign('http://calpocalypse.warrenalphonso.com/')
             }
         })
