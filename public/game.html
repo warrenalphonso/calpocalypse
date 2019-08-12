@@ -3,12 +3,18 @@
   <head>
     <title>A Multiplayer Game</title>
     <link href="game.css" rel="stylesheet" /> 
+
+    <!-- acornjs is a fast JavaScript parser which allows us to use ES6 in PaperScript. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/acorn/6.3.0/acorn.js"></script>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/paperjs/paper-full.js"></script>
     <script src="js/socket.js"></script>
+    
+    <script type="text/paperscript" src="js/paperjs/tiles.js" canvas="myCanvas"></script>
   </head>
+
   <body style="padding:0;">
     <canvas id="myCanvas" resize="true" keepalive="true"></canvas>
-    <script type="text/paperscript" src="js/paperjs/tiles.js" canvas="myCanvas"></script>
   </body>
 </html>

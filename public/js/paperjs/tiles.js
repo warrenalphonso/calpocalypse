@@ -1,11 +1,13 @@
-/** PaperScript hasn't upgraded to ES6 yet, so we can't use arrow functions, const, etc here! */
+/** PaperScript hasn't upgraded to ES6 yet, but we are using an acornjs CDN in game.html
+ *  so we can use arrow functions, const, etc. 
+ */
 
-var tileSize = 25
+const tileSize = 25
 
 // I don't think this is going to work for a map that's much bigger than screen
 var copy = []
 
-socket.on('load', function(blocks, players) {
+socket.on('load', (blocks, players) => {
 	for (var y = 0; y < blocks.length; y++) {
 		copy[y] = []
 		for (var x = 0; x < blocks[y].length; x++) {
@@ -27,7 +29,7 @@ socket.on('load', function(blocks, players) {
 	}
 })
 
-socket.on('update', function(player, replaceBlock) {
+socket.on('update', (player, replaceBlock) => {
 	var block = copy[replaceBlock.y][replaceBlock.x]
 	// var block = new Path.Rectangle(tileSize * replaceBlock.x, tileSize * replaceBlock.y, tileSize, tileSize) 
 	if (replaceBlock.block === 1) {
@@ -41,7 +43,7 @@ socket.on('update', function(player, replaceBlock) {
 	playerBlock.fillColor = 'black'
 })
 
-socket.on('removePlayer', function(replaceBlock) {
+socket.on('removePlayer', (replaceBlock) => {
 	var block = copy[replaceBlock.y][replaceBlock.x]
 	// var block = new Path.Rectangle(tileSize * replaceBlock.x, tileSize * replaceBlock.y, tileSize, tileSize) 
 	if (replaceBlock.block === 1) {

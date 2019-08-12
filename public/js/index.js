@@ -21,9 +21,14 @@ window.onload = () => {
             } else {
                 // Go to calpocalypse.warrenalphonso.com
                 console.log('Success!!!!')
-                console.log(res.json().message)
-                window.location.assign('http://calpocalypse.warrenalphonso.com/')
+                return res.json()
             }
+        })
+        .then(data => {
+            console.log(data.message)
+            window.location.assign('http://calpocalypse.warrenalphonso.com/')
+        }).catch(error => {
+            console.error(error)
         })
     }
 }
