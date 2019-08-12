@@ -11,7 +11,7 @@ window.onload = () => {
         document.getElementById('content').style.display = 'none'
         document.getElementById('loading-screen').style.display = 'block'
 
-        console.log('Fetching /running to start dyno')
+        console.log('GETing "/running" to start dyno')
         fetch(herokuPort + '/running', {
             method: 'GET'
         })
@@ -21,7 +21,7 @@ window.onload = () => {
             } else {
                 // Go to calpocalypse.warrenalphonso.com
                 console.log('Success!!!!')
-                console.log(res.json())
+                console.log(res.json().message)
                 window.location.assign('http://calpocalypse.warrenalphonso.com/')
             }
         })

@@ -11,7 +11,9 @@ var io = require('socket.io')(server)
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.get('/running', (req, res) => {
-  res.status(200).send("Server is up")
+  res.status(200).send({
+    message: 'Server is up'
+  })
 })
 
 app.get('/', (req, res) => {
