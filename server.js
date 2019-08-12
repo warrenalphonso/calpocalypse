@@ -1,5 +1,3 @@
-var uniqid = require('uniqid')
-
 var path = require('path')
 var express = require('express')
 var app = express()
@@ -13,7 +11,7 @@ var io = require('socket.io')(server)
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.get('/', (req, res) => {
-  res.status(200).sendFile('./index.html')
+  res.status(200).sendFile('./game.html')
 })
 
 server.listen(port, err => {
